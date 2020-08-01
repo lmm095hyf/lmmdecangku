@@ -2,7 +2,7 @@ HTTP的消息类型共分为两大类
 请求(Request)消息：由客户端发给服务器的消息。其组成包括：请求行(Request-Line),可选的头域(Field),及实体(Entity-Body)。
 
 响应(Response)消息：是服务器回复客户端请求的消息，其组成包括状态行(Status-Line),可选的头域(Header Field),及实体(Entity-Body)。
-
+。。。你不行啊。。。。
 
 请求消息格式:
 =========请求行============
