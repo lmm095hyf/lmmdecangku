@@ -5,8 +5,13 @@
 
 <mapper namespace="com.damai.dao.DmOrderitemMapper">
 
+	<resultMap type="com.damai.bean.DmOrderitem" id="rmdo">
+	
+		<association property="dmProduct" column="pid"
+			select="com.damai.dao.DmProductMapper.selectById"></association>
+	</resultMap>
 
-  <select id="selectById" resultType="com.damai.bean.DmOrderitem">
+  <select id="selectById" resultMap="rmdo">
     select * from dm_Orderitem where id=#{id}
   </select>
   

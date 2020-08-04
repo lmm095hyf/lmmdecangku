@@ -110,11 +110,17 @@ public class Mapper {
 		//不commit ，会话会在关闭时自动回滚
 		//session.commit();
 		
-		DmOrderitemMapper dom=session.getMapper(DmOrderitemMapper.class);
+		/*DmOrderitemMapper dom=session.getMapper(DmOrderitemMapper.class);
 		DmProductMapper dpm=session.getMapper(DmProductMapper.class);
 		
 		DmOrderitem doi=dom.selectById(59);
-		DmProduct dp=dpm.selectById(doi.getPid());
+		DmProduct dp=dpm.selectById(doi.getPid());*/
+		
+		DmOrderitemMapper dom=session.getMapper(DmOrderitemMapper.class);
+		DmOrderitem doi=dom.selectById(59);
+		//java黑科技==>反射==>动态代理技术
+		DmProduct dp=doi.getDmProduct();//调用dmProduct属性的get方法
+		
 		System.out.println(dp);
 		session.close();
 		
