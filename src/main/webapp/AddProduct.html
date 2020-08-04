@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加商品</title>
+
+<script type="text/javascript" src="js/vue.min.js"></script>
+<!-- 基于 promise 技术的 专门用于 ajax 调用的js-->
+<script type="text/javascript" src="js/axios.min.js"></script>
+
+
+
+<style type="text/css">
+label{
+	display: inline-block;
+	width:200px;
+	text-align: right;
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+<label>商品名称</label><input v-model="pname"><br>
+<label>商品价格</label><input v-model="mprice"><br>
+<label>折后价格</label><input v-model="sprice"><br>
+<label>图片</label><input v-model="image"><br>
+
+
+
+<label>商品卖点</label><input v-model="pdesc"><br>
+<label>是否热卖</label><input v-model="ishot"><br>
+<label>商品类目（1-7）</label><input v-model="cid"><br>
+<label></label><button @click="save">保存</button>
+</div>
+<script type="text/javascript">
+var vue = new Vue({
+	el : "#app",
+	data : {
+		pname:"",
+		mprice:"",
+		sprice:"",
+		image:"",
+		pdesc:"",
+		ishot:"",
+		cid:""
+		
+	}, 
+	
+	// 但 vue 对象创建好之后, 立即执行的代码
+	methods : {
+		save:function(){
+			axios({
+				url : "product.do?op=AddProduct",
+				method:"get",
+				params : {
+		        pname:this.pname,
+		        mprice:this.mprice,
+		        sprice:this.sprice,
+		        image:this.image,
+		        pdesc:this.pdesc,
+		        ishot:this.ishot,
+		        cid:this.cid
+				}
+			}).then( (res)=>{
+				alert(res.data)
+				this.pname="";
+		        this.mprice="";
+		        this.sprice="";
+		        
+		        this.pdesc="";
+		        
+		        this.cid="";
+			});
+		}
+	}
+});
+
+</script>
+
+</body>
+</html>

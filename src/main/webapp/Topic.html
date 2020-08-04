@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>大麦商城-发表评论</title>
+<link href="css/slider.css" rel="stylesheet" type="text/css"/>
+<link href="css/common.css" rel="stylesheet" type="text/css"/>
+<link href="css/index.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/axios.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+
+</head>
+<body>
+<div id="www">
+<div class="container header">
+	
+	
+<div class="span5">
+		<div class="logo">
+			<a href="index.html">
+				<img src="image/r___________renleipic_01/logo.png" alt="依依不舍"/>
+			</a>
+		</div>
+	</div>
+	<div class="span9">
+<div class="headerAd">
+	<img src="image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
+</div>	</div>
+
+	<script type="text/javascript">
+	var vue=new Vue({
+		el:"#ddd",
+		data:{
+			loginedUser:{}
+		},
+		created:function(){
+			axios.get("product.do?op=getlogin")
+			.then(res=>{
+				this.loginedUser=res.data;
+			})
+		}
+	})
+	</script>
+
+
+</div>	
+
+</div>
+	
+	<!--      主题        -->
+	
+	<DIV class="t" style="MARGIN-Top:20px" align="center">
+		<FORM name="loginForm" action="" method="post">
+			<br/>
+			<h2>发表评论</h2>
+			<textarea v-model="content" class="input" tabIndex="2" style="width: 700px;height: 170px" ></textarea><br>
+			<img alt="hhh" src="" width="100px" height="100px" id="upImg1" onclick="img1.click()"><br>
+			<button >上传图片</button>	
+			<br/><INPUT @click="login()" class="btn" tabIndex="6" type="button" value="发表">
+		</FORM>
+	</DIV>
+	
+
+<script type="text/javascript">
+var vue=new Vue({
+	el:".t",
+	data:{
+		content:"",
+		pid:"",
+		name:"",
+		images:"",
+	},
+	methods:{
+		login(){
+			var url="/S2-Phyf-DaMai/AddTopicServlet.do";
+			//js
+			var pid=5;
+			var name='lmm';
+			var images='图片';
+			var user={
+					//前面是请求参数名,后面是vue变量
+					content:this.content,
+					pid:pid,
+					name:name,
+					images:images
+			};//json格式
+			$.post(url,user,function(msg){
+				alert(msg);
+				if(msg=='评价成功！！！'){
+					//跳转首页
+					location.href="detail.html#"+pid;
+					
+				}
+			});
+		}
+	}
+});
+</script>
+	
+	
+</DIV>
+	
+<div class="container footer">
+
+	<div class="span24">
+		<div class="copyright">Copyright © 2005-2013 大麦商城 版权所有</div>
+	</div>
+
+</BODY>
+</HTML>
+
+
+
+
