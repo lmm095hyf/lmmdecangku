@@ -1,5 +1,7 @@
 package com.damai.bean;
 
+import java.util.List;
+
 public class DmCategory {
     private Integer id;
 
@@ -7,7 +9,18 @@ public class DmCategory {
 
     private Integer pid;
 
-    public Integer getId() {
+    private List<DmCategory> children;
+    
+    
+    public List<DmCategory> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<DmCategory> children) {
+		this.children = children;
+	}
+
+	public Integer getId() {
         return id;
     }
 

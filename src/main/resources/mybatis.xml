@@ -62,5 +62,6 @@
     <mapper resource="com/yc/damai/dao/ProductTest.xml"/> 
     <mapper resource="com/yc/damai/dao/CategoryMapper.xml"/> 
     <mapper resource="com/yc/damai/dao/DmOrderitemMapper.xml"/> 
+    <mapper resource="com/yc/damai/dao/OrdersMapper.xml"/> 
   </mappers>
 </configuration>

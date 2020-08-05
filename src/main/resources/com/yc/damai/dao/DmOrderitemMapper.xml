@@ -7,13 +7,38 @@
 
 	<resultMap type="com.damai.bean.DmOrderitem" id="rmdo">
 	
+		<!-- 一对一关联查询 
+			select 用于指定完成关联查询的sql的id ==> 命名空间+sql.id
+		-->
+		
 		<association property="dmProduct" column="pid"
-			select="com.damai.dao.DmProductMapper.selectById"></association>
+			select="com.damai.dao.DmOrderitemMapper.selectById"></association>
+			
+		<collection property="children" column="id" select="selectChildren" fetchType="lazy">
+		</collection>
 	</resultMap>
-
+	
+     <!-- 
+		id 是该select标签的唯一标识
+		resultType 表示返回的结果映射到的实体类的类型
+	 -->
+	 
+	 <insert id="insert" >
+	insert into dm_orders values(null,#{count},#{total},#{pid},#{oid})
+	</insert>
+  
+  
+	<select id="selectChildren" resultType="com.damai.bean.DmOrderitem">
+    select * from dm_Orderitem where oid=#{id}
+  	</select>
+  
+  
+	 
   <select id="selectById" resultMap="rmdo">
     select * from dm_Orderitem where id=#{id}
   </select>
+  
+  
   
   
 </mapper>

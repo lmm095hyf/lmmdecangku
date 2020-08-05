@@ -13,6 +13,10 @@ MyBatis( iBatis ): 简单易用的持久层框架, 实现 ORM 映射
 4. 业务方法...
 
 
+
+
+
+
 本章内容:
 1. 接口映射
 	改善sql调用方式
@@ -26,3 +30,41 @@ MyBatis( iBatis ): 简单易用的持久层框架, 实现 ORM 映射
 	
 	
 	一对多关联
+
+<!--column不做限制，可以为任意表的字段，而property须为type 定义的pojo属性-->
+<resultMap id="唯一的标识" type="映射的pojo对象">
+  <id column="表的主键字段，或者可以为查询语句中的别名字段" jdbcType="字段类型" property="映射pojo对象的主键属性" />
+  <result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"/>
+  <association property="pojo的一个对象属性" javaType="pojo关联的pojo对象">
+    <id column="关联pojo对象对应表的主键字段" jdbcType="字段类型" property="关联pojo对象的主席属性"/>
+    <result  column="任意表的字段" jdbcType="字段类型" property="关联pojo对象的属性"/>
+  </association>
+  <!-- 集合中的property须为oftype定义的pojo对象的属性-->
+  <collection property="pojo的集合属性" ofType="集合中的pojo对象">
+    <id column="集合中pojo对象对应的表的主键字段" jdbcType="字段类型" property="集合中pojo对象的主键属性" />
+    <result column="可以为任意表的字段" jdbcType="字段类型" property="集合中的pojo对象的属性" />  
+  </collection>
+</resultMap>	
+
+
+如果collection标签是使用嵌套查询，格式如下：
+
+ <collection column="传递给嵌套查询语句的字段参数" property="pojo对象中集合属性" ofType="集合属性中的pojo对象" select="嵌套的查询语句" > 
+ </collection>
+
+
+注意：<collection>标签中的column：要传递给select查询语句的参数，如果传递多个参数，格式为column= ” {参数名1=表字段1,参数名2=表字段2} ；
+
+	
+select元素有很多属性（这里说用的比较多的）：
+
+id：命名空间唯一标识，可以被用来引用这条语句
+
+parameterType：将会传入这条语句的参数类的完全限定名或者别名
+
+resultType：从这条语句要返回的期望类型的类的完全限定名或别名（这里注意下集合类型，应该是集合可以包含的类型，不能是集合本身），重要：使用resultType或resultMap，但不能同时使用。
+
+resultMap：命名引用外部的resultMap，其名称要和外部的resultMap元素的ID名称一致，用于映射其结果到实体类指定对象中。
+	
+	
+	

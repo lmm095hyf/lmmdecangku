@@ -5,8 +5,17 @@
 
 <mapper namespace="com.damai.dao.DmCategoryMapper">
 
+<resultMap type="com.damai.bean.DmCategory" id="rmdc">
+
+<collection property="children" column="id" select="selectChildren" fetchType="lazy">
+</collection>
+</resultMap>
 	
-  <select id="selectAll" resultType="com.damai.bean.DmCategory">
+<select id="selectChildren" resultType="com.damai.bean.DmCategory">
+    select * from dm_category where pid=#{id}
+  </select>
+  
+  <select id="selectAll" resultMap="rmdc">
     select * from dm_category
   </select>
   

@@ -1,5 +1,7 @@
 package com.damai.bean;
 
+import java.util.List;
+
 public class DmOrderitem {
     private Integer id;
 
@@ -11,7 +13,16 @@ public class DmOrderitem {
 
     private Integer oid;
     
-    private DmProduct dmProduct;
+    private List<DmOrderitem> children;
+    
+    public List<DmOrderitem> getChildren() {
+		return children;
+	}
+	public void setChildren(List<DmOrderitem> children) {
+		this.children = children;
+	}
+
+	private DmProduct dmProduct;
 	
 	public DmProduct getDmProduct() {
 		return dmProduct;
